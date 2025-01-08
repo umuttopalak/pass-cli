@@ -1,0 +1,4 @@
+click>=8.0.0
+cryptography>=3.4.7
+keyring>=24.0.0
+pyperclip>=1.8.2
