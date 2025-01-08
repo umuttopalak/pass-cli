@@ -11,7 +11,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 # Project metadata
-PROJECT_NAME = "pass-cli"
+PROJECT_NAME = "password-cli"
 VERSION = "0.1.0"
 AUTHOR = "Umut Topalak"
 AUTHOR_EMAIL = "umuttopalak@hotmail.com"
