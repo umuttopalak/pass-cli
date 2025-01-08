@@ -1,6 +1,5 @@
 # pass-cli
 
-[![Tests](https://github.com/umuttopalak/pass-cli/actions/workflows/test.yml/badge.svg)](https://github.com/umuttopalak/pass-cli/actions/workflows/test.yml)
 [![PyPI version](https://badge.fury.io/py/password-cli.svg)](https://badge.fury.io/py/password-cli)
 [![Python versions](https://img.shields.io/pypi/pyversions/password-cli.svg)](https://pypi.org/project/password-cli/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
