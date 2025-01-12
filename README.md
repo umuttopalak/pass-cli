@@ -69,6 +69,18 @@ Check sudo authentication status:
 pass-cli auth-check
 ```
 
+### List Passwords
+
+List all stored passwords:
+```bash
+pass-cli list
+```
+
+List passwords for a specific service:
+```bash
+pass-cli list -s github
+```
+
 ## Security Features
 
 - AES-256 encryption for all stored passwords

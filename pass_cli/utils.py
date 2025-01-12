@@ -5,12 +5,14 @@ import subprocess
 from .database import PasswordManager
 
 
-def check_sudo():
+def check_sudo() -> bool:
     """Check if user has sudo privileges"""
     try:
-        subprocess.run(["sudo", "-n", "true"], check=True)
-        return True
-    except subprocess.CalledProcessError:
+        result = subprocess.run(['sudo', '-n', 'true'], 
+                              capture_output=True, 
+                              text=True)
+        return result.returncode == 0
+    except Exception:
         return False
 
 
