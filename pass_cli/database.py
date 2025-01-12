@@ -119,6 +119,21 @@ class PasswordManager:
                 return self.cipher_suite.decrypt(encrypted_password.encode()).decode()
             return None 
 
+    def list_passwords(self, service_name: str = None):
+        with sqlite3.connect(self.db_path) as conn:
+            if service_name:
+                cursor = conn.execute(
+                    "SELECT service_name, username FROM passwords WHERE service_name = ?", 
+                    (service_name,)
+                )
+            else:
+                cursor = conn.execute("SELECT service_name, username FROM passwords")
+
+            result = cursor.fetchall()
+            if result:
+                return result
+            return []
+
     @classmethod
     def get_stored_key(cls) -> str:
         """Get encryption key from keyring"""

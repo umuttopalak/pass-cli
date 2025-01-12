@@ -4,6 +4,7 @@ from .commands.auth import auth
 from .commands.auth_check import auth_check
 from .commands.generate import generate
 from .commands.init import init
+from .commands.list import list
 from .commands.retrieve import retrieve
 from .commands.store import store
 
@@ -50,6 +51,7 @@ main.add_command(generate)
 main.add_command(init)
 main.add_command(store)
 main.add_command(retrieve)
+main.add_command(list)
 
 if __name__ == "__main__":
     main()
