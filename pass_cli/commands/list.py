@@ -10,39 +10,42 @@ from ..utils import check_initialized, check_sudo
 @click.option('--service', '-s', help='Filter passwords by service name')
 def list(service: str = None) -> None:
     """List saved passwords for all or specific service"""
+    if not check_sudo():
+        click.echo(click.style(
+            "✗ Authentication required! Please run 'pass-cli auth' first.", fg="red"))
+        return
+
+    if not check_initialized():
+        click.echo(click.style(
+            "✗ Password manager not initialized! Please run 'pass-cli init' first.", 
+            fg="red"))
+        return
+
     try:
-        if not check_sudo():
+        encryption_key = PasswordManager.get_stored_key()
+        if not encryption_key:
             click.echo(click.style(
-                "✗ Authentication required! Please run 'pass-cli auth' first.", fg="red"))
-            sys.exit(1)
+                "✗ No encryption key found! Please run 'pass-cli init' first.", fg="red"))
+            return
 
-        if not check_initialized():
-            click.echo(click.style(
-                "✗ Password manager not initialized! Please run 'pass-cli init' first.", 
-                fg="red"))
-            raise click.Abort()
-
-        # Get encryption key and initialize password manager
-        password_manager = PasswordManager(PasswordManager.get_stored_key())
-        
-        # Get stored passwords
+        password_manager = PasswordManager(encryption_key)
         stored_passwords = password_manager.list_passwords(service)
         
         if not stored_passwords:
             if service:
                 click.echo(click.style(
-                    f"No passwords found for service: {service}", fg="yellow"))
+                    f"✗ No passwords found for service: {service}", fg="yellow"))
             else:
-                click.echo(click.style("No passwords stored yet.", fg="yellow"))
+                click.echo(click.style("✗ No passwords stored yet.", fg="yellow"))
             return
 
-        # Display results
         click.echo(click.style("\nStored Passwords:", fg="green"))
         click.echo("─" * 50)
         for service_name, username in stored_passwords:
             click.echo(f"Service: {service_name}")
             click.echo(f"Username: {username}")
             click.echo("─" * 50)
+
     except Exception as e:
-        click.echo(click.style(f"Error: {str(e)}", fg="red"))
-        raise click.Abort()
+        click.echo(click.style(f"✗ {str(e)}", fg="red"))
+        return
