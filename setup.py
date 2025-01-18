@@ -12,7 +12,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 # Project metadata
 PROJECT_NAME = "password-cli"
-VERSION = "0.1.5"
+VERSION = "0.1.6"
 AUTHOR = "Umut Topalak"
 AUTHOR_EMAIL = "umuttopalak@hotmail.com"
 DESCRIPTION = "A secure command-line password manager with sudo authentication"

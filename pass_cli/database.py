@@ -134,6 +134,24 @@ class PasswordManager:
                 return result
             return []
 
+    def delete_password(self, service_name: str, username: str) -> bool:
+        """Delete a password from the database
+
+        Args:
+            service_name: Name of the service
+            username: Username for the service
+
+        Returns:
+            bool: True if password was deleted, False if not found
+        """
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                DELETE FROM passwords 
+                WHERE service_name = ? AND username = ?
+            ''', (service_name, username))
+            return cursor.rowcount > 0
+
     @classmethod
     def get_stored_key(cls) -> str:
         """Get encryption key from keyring"""
