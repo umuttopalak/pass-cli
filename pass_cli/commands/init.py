@@ -27,15 +27,6 @@ def init():
             click.echo(click.style(
                 "Generated secure encryption key.", fg="green"))
 
-        confirm_key = click.prompt(
-            "Confirm encryption key", 
-            hide_input=True
-        )
-
-        if encryption_key != confirm_key:
-            click.echo(click.style("✗ Encryption keys do not match!", fg="red"))
-            return
-
         PasswordManager(encryption_key)
         click.echo(click.style("✓ Password manager initialized successfully!", fg="green"))
 
