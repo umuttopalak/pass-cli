@@ -2,6 +2,7 @@ import click
 
 from .commands.auth import auth
 from .commands.auth_check import auth_check
+from .commands.delete import delete
 from .commands.generate import generate
 from .commands.init import init
 from .commands.list import list
@@ -33,12 +34,18 @@ class CustomHelpCommand(click.Group):
         formatter.write("      -u, --username     Username (required)\n")
         formatter.write("\n    pass-cli list         List saved passwords\n")
         formatter.write("      -s, --service      Filter passwords by service name\n")
+        formatter.write("\n    pass-cli delete       Delete a stored password\n")
+        formatter.write("      -s, --service      Service name (required)\n")
+        formatter.write("      -u, --username     Username (required)\n")
+        formatter.write("      -f, --force        Skip confirmation\n")
         formatter.write("\nExamples:\n")
         formatter.write("  pass-cli generate -l 16 -s github -u johndoe\n")
         formatter.write("  pass-cli store -s github -u johndoe -p mypassword\n")
         formatter.write("  pass-cli retrieve -s github -u johndoe\n")
         formatter.write("  pass-cli list\n")
         formatter.write("  pass-cli list -s github\n")
+        formatter.write("  pass-cli delete -s github -u johndoe\n")
+        formatter.write("  pass-cli delete -s github -u johndoe --force\n")
         formatter.write("\nOptions:\n")
         formatter.write("  --help  Show this message and exit.\n")
 
@@ -56,6 +63,7 @@ main.add_command(init)
 main.add_command(store)
 main.add_command(retrieve)
 main.add_command(list)
+main.add_command(delete)
 
 if __name__ == "__main__":
     main()

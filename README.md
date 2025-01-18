@@ -81,6 +81,18 @@ List passwords for a specific service:
 pass-cli list -s github
 ```
 
+### Delete Passwords
+
+Delete a stored password (with confirmation):
+```bash
+pass-cli delete -s github -u johndoe
+```
+
+Delete a stored password without confirmation:
+```bash
+pass-cli delete -s github -u johndoe --force
+```
+
 ## Security Features
 
 - AES-256 encryption for all stored passwords
@@ -89,6 +101,8 @@ pass-cli list -s github
 - System keyring integration for encryption key storage
 - Sudo authentication requirement for all operations
 - Local storage only - no cloud sync for enhanced security
+- Safe deletion with confirmation mechanism
+
 
 ## Development Setup
 
